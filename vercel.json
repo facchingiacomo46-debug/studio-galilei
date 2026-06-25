@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/analisi/:slug",
+      "destination": "https://qaikmemwfoxoysgcdmyu.supabase.co/storage/v1/object/public/analisi/:slug.pdf",
+      "permanent": false
+    }
+  ]
+}
