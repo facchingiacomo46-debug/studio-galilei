@@ -279,6 +279,63 @@
     .resp-col { padding: 34px 28px; }
     .final { padding: 54px 28px; border-radius: 18px; }
   }
+
+  /* ---------- LANGUAGE SWITCHER ---------- */
+  .lang-switch {
+    position: relative;
+    margin-left: 6px;
+  }
+  .lang-btn {
+    background: transparent;
+    border: 1.5px solid var(--grey-light);
+    color: var(--navy);
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 6px 10px;
+    border-radius: 7px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: border-color .2s, background .2s;
+  }
+  .lang-btn:hover {
+    border-color: var(--navy);
+    background: rgba(22,42,65,0.04);
+  }
+  .lang-btn .arrow { font-size: 10px; transition: transform .2s; }
+  .lang-btn.open .arrow { transform: rotate(180deg); }
+  .lang-drop {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    background: var(--white);
+    border: 1px solid var(--grey-light);
+    border-radius: 9px;
+    box-shadow: 0 6px 24px rgba(22,42,65,0.12);
+    overflow: hidden;
+    display: none;
+    z-index: 200;
+    min-width: 70px;
+  }
+  .lang-drop.show { display: block; }
+  .lang-drop button {
+    display: block;
+    width: 100%;
+    padding: 9px 16px;
+    border: none;
+    background: transparent;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+    cursor: pointer;
+    text-align: left;
+    transition: background .15s;
+  }
+  .lang-drop button:hover { background: rgba(30,149,254,0.08); }
+  .lang-drop button.active { color: var(--azure); }
 </style>
   <link rel="icon" type="image/png" href="data:image/png;base64,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">
 </head>
@@ -294,6 +351,17 @@
     <a href="#team">Chi siamo</a>
     <a href="#funziona">Come lavoriamo</a>
     <a href="#cta" class="nav-cta">Analisi gratuita</a>
+    
+    <div class="lang-switch" id="langSwitch">
+      <button class="lang-btn" id="langBtn" aria-label="Cambia lingua">
+        <span id="langLabel">IT</span>
+        <span class="arrow">▾</span>
+      </button>
+      <div class="lang-drop" id="langDrop">
+        <button data-lang="it" class="active">🇮🇹 IT</button>
+        <button data-lang="en">🇬🇧 EN</button>
+      </div>
+    </div>
   </div>
 </nav>
 
@@ -568,5 +636,207 @@
   });
 </script>
 
+
+<script>
+(function(){
+  var COOKIE_NAME = 'sg_lang';
+  function getCookieLang(name) {
+    var m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+    return m ? decodeURIComponent(m[1]) : null;
+  }
+  function setCookieLang(name, value, days) {
+    var d = new Date();
+    d.setTime(d.getTime() + (days * 86400000));
+    document.cookie = name + '=' + encodeURIComponent(value) + ';path=/;expires=' + d.toUTCString() + ';SameSite=Lax';
+  }
+
+  // IT → EN translation map
+  var T = {
+    'Risultati': 'Results',
+    'Chi siamo': 'About us',
+    'Come lavoriamo': 'How we work',
+    'Analisi gratuita': 'Free analysis',
+    'Cambia lingua': 'Change language',
+    'Miglioriamo le tue ': 'We improve your ',
+    ' in ': 'in ',
+    '60 giorni': '60 days',
+    '.': '.',
+    'Altrimenti, non paghi.': 'Otherwise, you don\'t pay.',
+    '🎁\xa0 Ottieni l\'analisi gratuita': '🎁\xa0 Get your free analysis',
+    '🔬\xa0 Come lavoriamo': '🔬\xa0 How we work',
+    'Unisciti a noi:': 'Join us:',
+    'Coming soon': 'Coming soon',
+    'Caso studio in arrivo': 'Case study coming soon',
+    'Caso studio · Tour operator': 'Case Study · Tour Operator',
+    'BeaVita Tours': 'BeaVita Tours',
+    'Presto disponibile': 'Available soon',
+    'Caso studio · Franchising': 'Case Study · Franchising',
+    'Dän Ink': 'Dän Ink',
+    'Apri il caso studio →': 'Open case study →',
+    'Caso studio · Servizi noleggio': 'Case Study · Rental Services',
+    'GR Box': 'GR Box',
+    'Caso studio · E-commerce': 'Case Study · E-commerce',
+    'Onlysolutions': 'Onlysolutions',
+    'Se anche tu...': 'If you also...',
+    'vorresti più risultati dalle tue Google Ads': 'want better results from your Google Ads',
+    'sei stanco di agenzie poco trasparenti e senza garanzie': 'are tired of opaque agencies with no guarantees',
+    'vuoi capire prima di pagare, non dopo': 'want to understand before paying, not after',
+    'Noi ci assumiamo...': 'We take responsibility...',
+    'la responsabilità ': 'responsibility ',
+    'del miglioramento': 'for improving',
+    ' delle tue Google Ads': ' your Google Ads',
+    'la responsabilità di mostrarti ': 'responsibility for showing you ',
+    'ogni numero, ogni decisione, ogni mese': 'every number, every decision, every month',
+    'la responsabilità del rischio. Al sessantesimo giorno decidi tu, e basta la tua parola: se non sei soddisfatto, ti restituiamo i ': 'responsibility for the risk. On the sixtieth day you decide, your word is enough: if you are not satisfied, we refund your ',
+    '1.500€': '€1,500',
+    'Come funziona, in tre passi': 'How it works, in three steps',
+    'Semplice, trasparente, senza impegni nascosti.': 'Simple, transparent, with no hidden commitments.',
+    'Analisi gratuita del tuo account': 'Free account analysis',
+    'Ti mandiamo un PDF con quello che abbiamo trovato sul tuo account. Lo leggi con calma, senza nessun impegno.': 'We send you a PDF with what we found in your account. You read it at your leisure, with no commitment.',
+    '2 mesi di lavoro, 1.500€ totali': '2 months of work, €1,500 total',
+    'Sistemiamo quello che abbiamo identificato. ': 'We fix what we identified. ',
+    'Sempre raggiungibili, sempre trasparenti.': 'Always reachable, always transparent.',
+    'Decidi tu': 'You decide',
+    'Dopo 60 giorni: ': 'After 60 days: ',
+    'continui con noi': 'continue with us',
+    ', esci senza penali, o chiedi il rimborso. Lo decidi solo tu, senza dover motivare nulla. Hai 14 giorni dalla fine della prova, e ti rimborsiamo entro 15.': ', leave with no penalties, or request a refund. Only you decide, with no need to justify. You have 14 days from the end of the trial, and we refund within 15.',
+    'Le domande che ci fanno tutti': 'Questions everyone asks us',
+    'Le risposte, in chiaro.': 'The answers, clearly.',
+    'Cosa copre esattamente il rimborso?': 'What exactly does the refund cover?',
+    'La nostra fee di ': 'Our fee of ',
+    '. Lo spend pubblicitario (quello che spendi direttamente su Google) è e resta sul tuo conto, è tuo a prescindere.': '. The ad spend (what you spend directly on Google) is and remains on your account — it\'s yours regardless.',
+    'Posso uscire dopo i 2 mesi?': 'Can I leave after 2 months?',
+    'Sì, senza penali e senza preavvisi. Decidi al sessantesimo giorno e basta.': 'Yes, with no penalties and no notice. You decide on the sixtieth day and that\'s it.',
+    'Lavorate con il mio settore?': 'Do you work with my industry?',
+    'Quasi sicuramente sì, e ti spieghiamo perché. Il nostro lavoro non è conoscere il tuo settore meglio di te, non potremmo, e sarebbe arroganza pretenderlo. È leggere il tuo account Google Ads e capire dove perde efficienza. Quello sappiamo farlo a prescindere dal mercato in cui sei.': 'Almost certainly yes, and we\'ll explain why. Our job is not to know your industry better than you — we couldn\'t, and it would be arrogant to claim so. It\'s to read your Google Ads account and understand where it\'s losing efficiency. That\'s something we can do regardless of your market.',
+    'Cosa succede in pratica nei 2 mesi?': 'What actually happens in the 2 months?',
+    'Settimana 1:': 'Week 1:',
+    ' audit completo del tuo account.': ' complete account audit.',
+    'Settimane 2-7:': 'Weeks 2-7:',
+    ' interventi sui problemi identificati e monitoraggio.': ' interventions on identified issues and monitoring.',
+    'Settimana 8:': 'Week 8:',
+    ' chiusura del periodo, decidi tu cosa fare.': ' end of period, you decide what to do.',
+    'Studio Galilei': 'Studio Galilei',
+    'Combiniamo specialisti di marketing e specialisti di intelligenza artificiale per essere più efficienti e portare risultati con più sicurezza, e ce ne assumiamo la responsabilità.': 'We combine marketing specialists and artificial intelligence specialists to be more efficient and deliver results with greater confidence — and we take responsibility for it.',
+    'Fondatore e consulente': 'Founder and consultant',
+    'Co-fondatore e consulente marketing': 'Co-founder and marketing consultant',
+    'Specialista advertising': 'Advertising specialist',
+    'Consulente interno': 'Internal consultant',
+    'Intelligenza Artificiale e sviluppo software': 'Artificial Intelligence and software development',
+    'Dramane Yigo': 'Dramane Yigo',
+    'Giacomo Facchin': 'Giacomo Facchin',
+    'Carlo Durigon': 'Carlo Durigon',
+    'Lorenzo Fornasier': 'Lorenzo Fornasier',
+    'Okay Sozen': 'Okay Sozen',
+    'L\'analisi è gratis.': 'The analysis is free.',
+    'Il resto è a rischio nostro.': 'The rest is on us.',
+    'Te la mandiamo in PDF, con quello che abbiamo trovato sul tuo account.': 'We\'ll send it in PDF, with what we found in your account.',
+    '🎁\xa0 Ottieni l\'analisi gratuita': '🎁\xa0 Get your free analysis',
+    'Google Ads con risultati, o non paghi': 'Google Ads with results, or you don\'t pay',
+    ' — Google Ads con risultati, o non paghi': ' — Google Ads with results, or you don\'t pay',
+    'Caso studio · Dän Ink': 'Case Study · Dän Ink',
+    'Caso studio · Onlysolutions': 'Case Study · Onlysolutions',
+    'Studio Galilei · Crocetta del Montello (TV) · P.IVA [placeholder] · Privacy Policy · Cookie Policy · Termini': 'Studio Galilei · Crocetta del Montello (TV) · VAT [placeholder] · Privacy Policy · Cookie Policy · Terms',
+    'Chiudi': 'Close',
+    'Caso studio · ': 'Case Study · ',
+  };
+
+  function normalizeText(t) {
+    return t.replace(/\xa0/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+
+  var normalizedIT = {};
+  var normalizedEN = {};
+  for (var k in T) {
+    normalizedIT[normalizeText(k)] = T[k];
+    normalizedEN[normalizeText(T[k])] = k;
+  }
+
+  function getLang() {
+    var lang = getCookieLang(COOKIE_NAME);
+    if (lang) return lang;
+    if (navigator.language && navigator.language.indexOf('it') === 0) return 'it';
+    return 'en';
+  }
+
+  function applyLang(lang) {
+    document.documentElement.lang = lang;
+    setCookieLang(COOKIE_NAME, lang, 365);
+
+    var label = document.getElementById('langLabel');
+    if (label) label.textContent = lang === 'it' ? 'IT' : 'EN';
+    var btns = document.querySelectorAll('#langDrop button');
+    btns.forEach(function(b) {
+      b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+    });
+
+    translateTextNodes(document.body, lang);
+  }
+
+  function translateTextNodes(el, lang) {
+    if (!el) return;
+    if (el.nodeName === 'SCRIPT' || el.nodeName === 'STYLE' || el.nodeName === 'NOSCRIPT') return;
+    if (el.closest && (el.closest('#langSwitch') || el.closest('#langDrop'))) return;
+
+    var childNodes = el.childNodes;
+    for (var i = 0; i < childNodes.length; i++) {
+      var node = childNodes[i];
+      if (node.nodeType === 3) {
+        var text = node.textContent;
+        var normalized = normalizeText(text);
+        if (normalized) {
+          if (lang === 'en') {
+            var en = normalizedIT[normalized];
+            if (en) { node.textContent = text.replace(text.trim(), en); }
+          } else {
+            var it = normalizedEN[normalized];
+            if (it) { node.textContent = text.replace(text.trim(), it); }
+          }
+        }
+      } else if (node.nodeType === 1) {
+        translateTextNodes(node, lang);
+      }
+    }
+  }
+
+  // Initialize
+  var currentLang = getLang();
+  applyLang(currentLang);
+
+  // UI handlers
+  document.addEventListener('DOMContentLoaded', function() {
+    var langBtn = document.getElementById('langBtn');
+    var langDrop = document.getElementById('langDrop');
+
+    if (langBtn) {
+      langBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        langDrop.classList.toggle('show');
+        langBtn.classList.toggle('open');
+      });
+    }
+
+    if (langDrop) {
+      langDrop.querySelectorAll('button').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var lang = this.getAttribute('data-lang');
+          if (lang && lang !== currentLang) {
+            currentLang = lang;
+            applyLang(lang);
+          }
+          langDrop.classList.remove('show');
+          if (langBtn) langBtn.classList.remove('open');
+        });
+      });
+    }
+
+    document.addEventListener('click', function() {
+      if (langDrop) langDrop.classList.remove('show');
+      if (langBtn) langBtn.classList.remove('open');
+    });
+  });
+})();
+</script>
 </body>
 </html>
